@@ -1,0 +1,39 @@
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Aerolínea</title>
+        <meta charset="UTF-8">
+        <link href="/css/menu.css)" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <header th:replace=""layout/>plantilla :: header/>
+        <div class="contenido"> 
+            <h2>Listado de Países</h2>
+            <a th:href="@{/paises/nuevo}">Nuevo País</a>
+            <div th:if="${paises !=null and !paises.empty}">
+                <br/>
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>Descripcion</th>
+                            <th>Activo</th>
+                            <th>Modificar</th>
+                            <th>Eliminar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="item :${paises}">
+                            <td th:text= "${item.descripcion}"></td>
+                            <td><input type="checkbox" name="activo" th:checked="${item.activo}" disabled /> </td>
+                            <td><a th:href="@{/paises/modificar/}+ ${item.idPaises}">Modificar</a></td>
+                            <td><a th:href="@{/paises/eliminar/}+ ${item.idPaises}">Eliminar</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div th:if="${clientes == null or clientes.empty}">
+                No tenemos lista de Países que mostrar...
+            </div>
+        </div> 
+        <footer th:replace="layout/plantilla :: footer"/>  
+    </body>
+</html>

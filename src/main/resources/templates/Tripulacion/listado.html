@@ -1,0 +1,53 @@
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Aerolínea</title>
+        <meta charset="UTF-8">
+        <link href="/css/menu.css)" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <header th:replace=""layout/>plantilla :: header/>
+        <div class="contenido">
+            <h2>Listado de tripulacion</h2>
+            <a th:href="@{/tripulacion/nuevo}">Nuevo Tripulacion</a>
+            <div th:if="${boletos !=null and !boletos.empty}">
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Apellidos</th>
+                            <th>Correo</th>
+                            <th>Puesto</th>
+                            <th>Telefono</th>
+                            <th>Nacionalidad</th>
+                            <th>Fecha de Nacimiento</th>
+                            <th>Pasaporte</th>
+                            <th>Modificar</th>
+                            <th>Eliminar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:reach="item: ${tripulacion}">
+                            <td th:txt="${item.nombre}"></td>
+                            <td th:txt="${item.apellidos}"></td>
+                            <td th:txt="${item.correo}"></td>
+                            <td th:txt="${item.puesto}"></td>
+                            <td th:txt="${item.telefono}"></td>
+                            <td th:txt="${item.fechanacimiento}"></td>
+                            <td th:txt="${item.pasaporte}"></td>
+                            <td><a th:href="@{/tripulacion/modificar/}+ ${item.idTripulacion}">Modificar</a></td>
+                            <td><a th:href="@{/tripulacion/eliminar/}+ ${item.idTripulacion}">Eliminar</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <div th:if="${tripulacion == null or tripulacion.empty}">
+            No tenemos lista de tripulacion que mostrar...
+        </div>
+        </div>
+        
+          <footer th:replace="layout/plantilla :: footer"/>  
+    </body>
+</html>
+
+

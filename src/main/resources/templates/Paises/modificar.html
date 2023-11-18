@@ -1,0 +1,30 @@
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Aerolínea</title>
+        <meta charset="UTF-8">
+        <link href="/css/menu.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <header th:replace=""layout/>plantilla :: header/>
+        <div class="contenido">
+            <h2>Datos de los países</h2>
+            <br>
+            <a th:href="@{paises/listado}">Regresar</a>
+            <br/>
+            <br/>
+            <form th:action="@{/paises/guardar}"
+                  method="POST"
+                  th:object="${paises}">
+                <input type="hidden" name="idPaises" th:field="*()idPaises"/>
+                <label for="descripcion">Descripción: </label>
+                <input type="text" name="nombre" th:field="*{descripcion}" />
+                <br>
+                <label for="activo">Activo: </label>
+                <input type="checkbox" name="activo" th:field="*{activo}" />
+                <br>
+                <input type="submit" name="Guardar" value="Guardar"/>
+            </form>
+        </div>
+        <footer th:replace="layout/plantilla :: footer"/>  
+    </body>
+</html>

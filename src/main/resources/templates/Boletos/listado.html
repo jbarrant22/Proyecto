@@ -1,0 +1,45 @@
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Aerolínea</title>
+        <meta charset="UTF-8">
+        <link href="/css/menu.css)" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <header th:replace=""layout/>plantilla :: header/>
+        <div class="contenido"> 
+            <h2>Listado de Boletos</h2>
+            <a th:href="@{/boletos/nuevo}">Nuevo Cliente</a>
+            <div th:if="${boletos !=null and !boletos.empty}">
+                <br/>
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>Descripcion</th>
+                            <th>Detalle</th>
+                            <th>Precio</th>
+                            <th>Destino</th>
+                            <th>Activo</th>
+                            <th>Modificar</th>
+                            <th>Eliminar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="item :${boletoss}">
+                            <td th:text= "${item.descripcion}"></td>
+                            <td th:text= "${#numbers.formatDecimal(item.precio, 3, 2)}"></td>
+                            <td th:text= "${item.destino}"></td>
+                            <td><input type="checkbox" name="activo" th:checked="${item.activo}" disabled />
+                            </td>
+                             <td><a th:href="@{/boletos/modificar/}+ ${item.idBoletos}">Modificar</a></td>
+                            <td><a th:href="@{/boletos/eliminar/}+ ${item.idBoletos}">Eliminar</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div th:if="${clientes == null or clientes.empty}">
+                No tenemos lista de boletos que mostrar...
+            </div>
+        </div> 
+        <footer th:replace="layout/plantilla :: footer"/>  
+    </body>
+</html>

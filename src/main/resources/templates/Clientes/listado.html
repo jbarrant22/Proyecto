@@ -1,0 +1,50 @@
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Aerolínea</title>
+        <meta charset="UTF-8">
+        <link href="/css/menu.css)" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <header th:replace=""layout/>plantilla :: header/>
+        <div class="contenido">
+            <h2>Listado de clientes</h2>
+            <a th:href="@{/cliente/nuevo}">Nuevo Cliente</a>
+            <div th:if="${boletos !=null and !boletos.empty}">
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Apellidos</th>
+                            <th>Correo</th>
+                            <th>Telefono</th>
+                            <th>Nacionalidad</th>
+                            <th>Fecha de Nacimiento</th>
+                            <th>Pasaporte</th>
+                            <th>Modificar</th>
+                            <th>Eliminar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:reach="item: ${clientes}">
+                            <td th:txt="${item.nombre}"></td>
+                            <td th:txt="${item.apellidos}"></td>
+                            <td th:txt="${item.correo}"></td>
+                            <td th:txt="${item.telefono}"></td>
+                            <td th:txt="${item.fechanacimiento}"></td>
+                            <td th:txt="${item.pasaporte}"></td>
+                            <td><a th:href="@{/cliente/modificar/}+ ${item.idCliente}">Modificar</a></td>
+                            <td><a th:href="@{/cliente/eliminar/}+ ${item.idCliente}">Eliminar</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <div th:if="${clientes == null or clientes.empty}">
+            No tenemos lista de clientes que mostrar...
+        </div>
+        </div>
+        
+          <footer th:replace="layout/plantilla :: footer"/>  
+    </body>
+</html>
+
